@@ -19,7 +19,7 @@ const NotFound = () => {
   };
 
   const handleGoHome = () => {
-    navigate('/');
+    navigate('/dashboard');
   };
 
   const bgColor = useColorModeValue('gray.50', 'gray.900');

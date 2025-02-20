@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { join } from 'path';
+import { StudentsModule } from './students/students.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { join } from 'path';
       autoLoadEntities: true,
     }),
     AuthModule,
+    StudentsModule,
   ],
   controllers: [],
   providers: [],

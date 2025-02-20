@@ -63,9 +63,14 @@ export class AuthService {
         throw new UnauthorizedException();
       }
 
+      const new_token = await this.jwtService.signAsync({
+        sub: payload.sub,
+        email: user.email,
+      });
+
       return {
         user,
-        access_token: token,
+        access_token: new_token,
       };
     } catch {
       throw new UnauthorizedException();

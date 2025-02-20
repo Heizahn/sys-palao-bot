@@ -27,7 +27,7 @@ export const Login = () => {
 
     try {
       await login(email, password);
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       toast({
         title: 'Error al iniciar sesión',

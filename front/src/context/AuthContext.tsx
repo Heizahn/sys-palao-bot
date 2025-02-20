@@ -93,7 +93,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         alignItems="center"
         justifyContent="center"
       >
-        <Loading />; // O tu componente de loading
+        <Loading />
       </Box>
     );
   }

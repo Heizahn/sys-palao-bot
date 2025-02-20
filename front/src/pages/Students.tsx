@@ -1,31 +1,20 @@
 import {
   Box,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
   useColorModeValue,
-  Text,
-  HStack,
-  Tag,
-  IconButton,
-  Tooltip,
   Input,
   InputGroup,
   InputLeftElement,
 } from '@chakra-ui/react';
-import { FiEdit2, FiEye, FiSearch } from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 import { useState } from 'react';
+import { CuposTable } from '../components/CuposTable';
 
 export const Students = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
-    //que ocupe todo el ancho de la pantalla disponible
-    <Box>
-      <Box mb={4}>
+    <Box w="100%">
+      <Box mb={4} w="100%">
         <InputGroup>
           <InputLeftElement pointerEvents="none">
             <FiSearch color="gray.300" />
@@ -43,63 +32,9 @@ export const Students = () => {
         p={4}
         rounded="lg"
         shadow="base"
+        w={'100%'}
       >
-        <Table variant="simple">
-          <Thead>
-            <Tr>
-              <Th>Alumno</Th>
-              <Th>Representante</Th>
-              <Th>Teléfono</Th>
-              <Th>Horario</Th>
-              <Th>Fecha Nacimiento</Th>
-              <Th>Acciones</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            <Tr>
-              <Td>
-                <Text fontWeight="medium">Juan Pérez</Text>
-              </Td>
-              <Td>
-                <Text>María Pérez</Text>
-                <Text fontSize="sm" color="gray.600">
-                  +58 414-1234567
-                </Text>
-              </Td>
-              <Td>
-                <Text>+58 424-1234567</Text>
-              </Td>
-              <Td>
-                <Tag colorScheme="blue">Mañana</Tag>
-              </Td>
-              <Td>
-                <Text>15/03/2015</Text>
-              </Td>
-              <Td>
-                <HStack spacing={2}>
-                  <Tooltip label="Ver detalles">
-                    <IconButton
-                      aria-label="Ver detalles"
-                      icon={<FiEye />}
-                      size="sm"
-                      colorScheme="blue"
-                      variant="ghost"
-                    />
-                  </Tooltip>
-                  <Tooltip label="Editar">
-                    <IconButton
-                      aria-label="Editar alumno"
-                      icon={<FiEdit2 />}
-                      size="sm"
-                      colorScheme="green"
-                      variant="ghost"
-                    />
-                  </Tooltip>
-                </HStack>
-              </Td>
-            </Tr>
-          </Tbody>
-        </Table>
+        <CuposTable />
       </Box>
     </Box>
   );
