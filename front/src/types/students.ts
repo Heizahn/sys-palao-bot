@@ -14,3 +14,7 @@ export interface Cupo {
   fecha_nacimiento: string;
   horario: TypeTurn;
 }
+
+export interface CupoRegister extends Cupo {
+  create_at_register: Date;
+}

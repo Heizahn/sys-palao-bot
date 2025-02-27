@@ -12,7 +12,7 @@ import {
 import { IconType } from 'react-icons';
 import {
   FiHome,
-  FiMessageSquare,
+  //   FiMessageSquare,
   FiUsers,
   FiSettings,
   FiLogOut,
@@ -34,6 +34,9 @@ interface NavItemProps extends FlexProps {
 const NavItem = ({ icon, children, name, to, ...rest }: NavItemProps) => {
   const { pathname } = useLocation();
 
+  const paths = pathname.split('/');
+  const lastPath = paths[paths.length - 1];
+
   return (
     <Link as={RouterLink} to={to} style={{ textDecoration: 'none' }}>
       <Flex
@@ -44,11 +47,11 @@ const NavItem = ({ icon, children, name, to, ...rest }: NavItemProps) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: 'cyan.400',
+          bg: 'blue.400',
           color: 'white',
         }}
-        bg={pathname.includes(name) ? 'cyan.400' : ''}
-        color={pathname.includes(name) ? 'white' : ''}
+        bg={lastPath === name ? 'blue.400' : ''}
+        color={lastPath === name ? 'white' : ''}
         {...rest}
       >
         {icon && (
@@ -109,9 +112,12 @@ export const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
           <NavItem icon={FiUsers} to="/students" name="students">
             Estudiantes
           </NavItem>
-          <NavItem icon={FiMessageSquare} to="/messages" name="messages">
-            Mensajes
+          <NavItem icon={FiUsers} to="/registers" name="registers">
+            Registrados
           </NavItem>
+          {/* <NavItem icon={FiMessageSquare} to="/messages" name="messages">
+            Mensajes
+          </NavItem> */}
           {user?.role === 'admin' && (
             <NavItem icon={FiSettings} to="/settings" name="settings">
               Configuración

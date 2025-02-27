@@ -10,12 +10,15 @@ import {
   Text,
   TableContainer,
 } from '@chakra-ui/react';
-import { useCupos } from '../hooks/useCupos';
 import { capitalize } from '../utils/stringUtils';
-import RegisterCupoButton from './RegisterButton';
+import { useCuposRegisters } from '../hooks/useCupos';
 
-export const CuposTable = ({ searchTerm }: { searchTerm: string }) => {
-  const { data: cupos, isLoading, isError } = useCupos();
+export default function CuposRegistersTable({
+  searchTerm,
+}: {
+  searchTerm: string;
+}) {
+  const { data: cupos, isLoading, isError } = useCuposRegisters();
   const filteredCupos = cupos?.filter(
     (cupo) =>
       cupo.alumno.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -48,7 +51,6 @@ export const CuposTable = ({ searchTerm }: { searchTerm: string }) => {
             <Th>Teléfono</Th>
             <Th>Horario</Th>
             <Th>Fecha de Nacimiento</Th>
-            <Th></Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -59,13 +61,10 @@ export const CuposTable = ({ searchTerm }: { searchTerm: string }) => {
               <Td>{cupo.tlf}</Td>
               <Td>{capitalize(cupo.horario)}</Td>
               <Td>{cupo.fecha_nacimiento}</Td>
-              <Td textAlign="end">
-                <RegisterCupoButton cupoId={cupo.id} clientName={cupo.alumno} />
-              </Td>
             </Tr>
           ))}
         </Tbody>
       </Table>
     </TableContainer>
   );
-};
+}

@@ -1,12 +1,13 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Dashboard } from '../pages/Dashboard';
-import { Messages } from '../pages/Messages';
+// import { Messages } from '../pages/Messages';
 import { Students } from '../pages/Students';
 import { Settings } from '../pages/Settings';
 import { Login } from '../pages/Login';
 import { ProtectedRoute } from '../components/ProtectedRute';
 import { Layout } from '../components/Layout';
 import NotFound from '../pages/NotFound';
+import Registers from '../pages/Registers';
 
 export const AppRoutes = () => {
   return (
@@ -34,7 +35,18 @@ export const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+
       <Route
+        path="/registers"
+        element={
+          <ProtectedRoute>
+            <Layout>
+              <Registers />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      {/* <Route
         path="/messages"
         element={
           <ProtectedRoute>
@@ -42,8 +54,8 @@ export const AppRoutes = () => {
               <Messages />
             </Layout>
           </ProtectedRoute>
-        }
-      />
+        } 
+      />*/}
       <Route path="*" element={<NotFound />} />
       <Route
         path="/settings"

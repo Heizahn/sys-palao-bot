@@ -35,3 +35,10 @@ export class Cupo {
   })
   horario: typeTurn;
 }
+
+// Crear una tabla para los estudiantes registrados
+@Entity('cupo_registro')
+export class CupoRegistro extends Cupo {
+  @Column('timestamp')
+  create_at_register: Date;
+}
