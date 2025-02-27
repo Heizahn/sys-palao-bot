@@ -1,5 +1,12 @@
-import { IsEmail, IsString, MinLength } from 'class-validator';
+import {
+  IsEmail,
+  IsEnum,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { UserRole } from '../entities/auth.entity';
 
 export class LoginDto {
   @ApiProperty({ example: 'usuario@example.com' })
@@ -26,4 +33,8 @@ export class RegisterDto extends LoginDto {
     message: 'El nombre debe contener por lo menos dos caracteres',
   })
   name: string;
+
+  @IsEnum(UserRole)
+  @IsOptional()
+  role?: UserRole = UserRole.USER;
 }

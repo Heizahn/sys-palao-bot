@@ -11,20 +11,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const validateAuth = async () => {
+      try {
+        const authStatus = await isAuth();
+        setIsAuthenticated(authStatus);
+      } catch (error) {
+        setIsAuthenticated(false);
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     validateAuth();
   }, []);
-
-  const validateAuth = async () => {
-    try {
-      const authStatus = await isAuth();
-      setIsAuthenticated(authStatus);
-    } catch (error) {
-      setIsAuthenticated(false);
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const login = async (email: string, password: string) => {
     try {

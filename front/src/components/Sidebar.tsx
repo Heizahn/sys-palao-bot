@@ -14,7 +14,7 @@ import {
   FiHome,
   FiMessageSquare,
   FiUsers,
-  //   FiSettings,
+  FiSettings,
   FiLogOut,
 } from 'react-icons/fi';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
@@ -68,7 +68,7 @@ const NavItem = ({ icon, children, name, to, ...rest }: NavItemProps) => {
 };
 
 export const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
-  const { logout } = useAuth(); // Asumiendo que tienes un hook useAuth
+  const { logout, user } = useAuth(); // Asumiendo que tienes un hook useAuth
 
   const handleLogout = () => {
     logout();
@@ -100,18 +100,23 @@ export const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
               onClick={onClose}
             />
           </Flex>
-          <NavItem icon={FiHome} to="/dashboard" name="dashboard">
-            Dashboard
+
+          {user?.role === 'admin' && (
+            <NavItem icon={FiHome} to="/dashboard" name="dashboard">
+              Dashboard
+            </NavItem>
+          )}
+          <NavItem icon={FiUsers} to="/students" name="students">
+            Estudiantes
           </NavItem>
           <NavItem icon={FiMessageSquare} to="/messages" name="messages">
             Mensajes
           </NavItem>
-          <NavItem icon={FiUsers} to="/students" name="students">
-            Estudiantes
-          </NavItem>
-          {/* <NavItem icon={FiSettings} to="/settings" name="settings">
-            Configuración
-          </NavItem> */}
+          {user?.role === 'admin' && (
+            <NavItem icon={FiSettings} to="/settings" name="settings">
+              Configuración
+            </NavItem>
+          )}
         </Box>
 
         {/* Botón de Logout */}

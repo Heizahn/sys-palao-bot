@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { User } from './entities/auth.entity';
+import { AdminGuard } from 'src/guards/admin.guard';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { User } from './entities/auth.entity';
       }),
     }),
   ],
-  providers: [AuthService],
+  providers: [AuthService, AdminGuard],
   controllers: [AuthController],
   exports: [AuthService],
 })

@@ -34,7 +34,7 @@ export const Students = () => {
         shadow="base"
         w={'100%'}
       >
-        <CuposTable />
+        <CuposTable searchTerm={searchTerm} />
       </Box>
     </Box>
   );

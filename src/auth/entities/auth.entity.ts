@@ -1,3 +1,4 @@
+// src/auth/entities/auth.entity.ts
 import {
   Entity,
   Column,
@@ -8,6 +9,11 @@ import {
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import * as bcrypt from 'bcrypt';
+
+export enum UserRole {
+  ADMIN = 'admin',
+  USER = 'user',
+}
 
 @Entity('users')
 export class User {
@@ -25,6 +31,14 @@ export class User {
   @Column()
   @Expose()
   name: string;
+
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.USER,
+  })
+  @Expose()
+  role: UserRole;
 
   @CreateDateColumn()
   @Expose()

@@ -38,6 +38,7 @@ export class AuthService {
     const payload = {
       sub: user.id,
       email: user.email,
+      role: user.role,
     };
 
     const access_token = await this.jwtService.signAsync(payload);
@@ -47,6 +48,7 @@ export class AuthService {
         id: user.id,
         email: user.email,
         name: user.name,
+        role: user.role,
       },
       access_token,
     };
@@ -66,10 +68,16 @@ export class AuthService {
       const new_token = await this.jwtService.signAsync({
         sub: payload.sub,
         email: user.email,
+        role: user.role,
       });
 
       return {
-        user,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+        },
         access_token: new_token,
       };
     } catch {

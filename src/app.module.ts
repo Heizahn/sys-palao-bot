@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { join } from 'path';
 import { StudentsModule } from './students/students.module';
+import { ApikeyModule } from './apikey/apikey.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { StudentsModule } from './students/students.module';
     }),
     AuthModule,
     StudentsModule,
+    ApikeyModule,
   ],
   controllers: [],
   providers: [],

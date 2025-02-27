@@ -9,12 +9,18 @@ import {
   Spinner,
   Text,
   TableContainer,
+  Button,
 } from '@chakra-ui/react';
 import { useCupos } from '../hooks/useCupos';
 import { capitalize } from '../utils/stringUtils';
 
-export const CuposTable = () => {
+export const CuposTable = ({ searchTerm }: { searchTerm: string }) => {
   const { data: cupos, isLoading, isError } = useCupos();
+  const filteredCupos = cupos?.filter(
+    (cupo) =>
+      cupo.alumno.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      cupo.representante.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
 
   if (isLoading) {
     return (
@@ -42,16 +48,28 @@ export const CuposTable = () => {
             <Th>Teléfono</Th>
             <Th>Horario</Th>
             <Th>Fecha de Nacimiento</Th>
+            <Th></Th>
           </Tr>
         </Thead>
         <Tbody>
-          {cupos?.map((cupo) => (
+          {filteredCupos?.map((cupo) => (
             <Tr key={cupo.id}>
               <Td>{cupo.alumno}</Td>
               <Td>{cupo.representante}</Td>
               <Td>{cupo.tlf}</Td>
               <Td>{capitalize(cupo.horario)}</Td>
               <Td>{cupo.fecha_nacimiento}</Td>
+              <Td textAlign="end">
+                <Button
+                  size="sm"
+                  colorScheme="blue"
+                  onClick={() => {
+                    console.log('Retirar', cupo.id);
+                  }}
+                >
+                  Retirar
+                </Button>
+              </Td>
             </Tr>
           ))}
         </Tbody>
